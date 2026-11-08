@@ -739,7 +739,7 @@ const DEFAULT_SHIPPING = [
 const DEFAULT_ACCOUNT = {email:"admin@asala.com",pass:"asala123"};
 
 function load(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f;}catch(e){return f;}}
-let products = [];
+let products = load('asala_products', DEFAULT_PRODUCTS);
 fetch('products.json').then(r => r.json()).then(d => { 
   let allProds = d.products || d; 
   products = allProds.filter(p => p.image && !p.image.includes('base64') && p.image.trim() !== ''); 
