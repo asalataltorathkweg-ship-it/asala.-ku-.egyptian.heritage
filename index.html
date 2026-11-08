@@ -730,7 +730,7 @@ const DEFAULT_REVIEWS = [
 ];
 
 const DEFAULT_DESIGN = {black:"#0b0908",wine:"#6d2230",gold:"#c4a76b",ivory:"#f7f1e3",fontTitle:"'Amiri',serif",fontBody:"'Cairo',sans-serif"};
-const DEFAULT_MEDIA = {logo:"",hero:""};
+const DEFAULT_MEDIA = {logo:"22.jpg",hero:"cover.jpg"};
 const DEFAULT_SHIPPING = [
   {title:"🇰🇼 داخل الكويت",items:["المدة: 20-25 يوم عمل (شحن من مصر)","توصيل لجميع المناطق","الدفع عند الاستلام"]},
   {title:"✈️ دول الخليج",items:["السعودية، الإمارات، قطر، عمان، البحرين","المدة: 20-25 يوم عمل","تغليف خشبي خاص"]},
@@ -739,7 +739,8 @@ const DEFAULT_SHIPPING = [
 const DEFAULT_ACCOUNT = {email:"admin@asala.com",pass:"asala123"};
 
 function load(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f;}catch(e){return f;}}
-let products = load('asala_products', DEFAULT_PRODUCTS);
+let products = [];
+fetch('products.json').then(r => r.json()).then(d => { products = d.products || d; renderAll(); });
 let settings = load('asala_settings', DEFAULT_SETTINGS);
 let reviews = load('asala_reviews', DEFAULT_REVIEWS);
 let design = load('asala_design', DEFAULT_DESIGN);
