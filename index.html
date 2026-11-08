@@ -741,44 +741,25 @@ const DEFAULT_ACCOUNT = {email:"elsaftyahmed173@gmail.com",pass:"Asala@2026#Kw"}
 function load(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f;}catch(e){return f;}}
 let products = [];
 fetch('let products = load('asala_products', DEFAULT_PRODUCTS);
-fetch('products.json').then(r => r.json()).then(d => { 
-  let allProds = d.products || d; 
-  products = allProds.filter(p => p.image && !p.image.includes('base64') && p.image.trim() !== ''); 
-  renderAll(); 
-});
-let settings = load('asala_settings', DEFAULT_SETTINGS);
-let reviews = load('asala_reviews', DEFAULT_REVIEWS);
-let design = load('asala_design', DEFAULT_DESIGN);
-let media = load('asala_media', DEFAULT_MEDIA);
-let shipping = load('asala_shipping', DEFAULT_SHIPPING);
-let account = load('asala_account', DEFAULT_ACCOUNT);
-let cart = load('asala_cart', []);
-
-let currentCategory='الكل', currentSearch='', currentPage=1;
-const itemsPerPage=12;
-let activeProduct=null;
-
-/* ============================================
-   ✅ دالة التمرير السلس (الحل الأساسي للمشكلة)
-============================================ */
-function scrollToSection(event, sectionId){
-  if(event) event.preventDefault();
-
-  const target = document.getElementById(sectionId);
-  if(!target){
-    console.warn('❌ القسم غير موجود:', sectionId);
-    showToast('⚠️ القسم غير متاح حالياً');
-    return;
-  }
-
-  // حساب المسافة مع مراعاة الهيدر الثابت
-  const headerHeight = document.querySelector('.header')?.offsetHeight || 70;
-  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-
-  window.scrollTo({
-    top: targetPosition,
-    behavior: 'smooth'
-  });
+// جلب البيانات من الذاكرة المحلية أو النسخة الاحتياطية
+let rawProducts = JSON.parse(localStorage.getItem('asala_products_v10')) || [];
+if (rawProducts.length === 0) {
+  // لو مفيش بيانات في المتصفح، نجيبها من الكود الأساسي
+  rawProducts = [
+    {id:1,name:"طقم صواني الملكة نفرتيتي",cat:"صواني تقديم",royal:"👑 درة متحفية",desc:"طقم صواني تقديم فاخر مطعم بالصدف الطبيعي بتصميم نفرتيتي العريق.",story:"فخامة الضيافة الملكية بتفاصيل يدوية دقيقة.",price:"22.000 د.ك",oldPrice:"26.000 د.ك",stock:"متوفر",featured:"yes",image:"1.jpg"},
+    {id:2,name:"طقم صواني السلطان سليمان القانوني",cat:"صواني تقديم",royal:"👑 درة متحفية",desc:"صواني تقديم عريقة مشغولة بأفخم تطعيمات عرق اللؤلؤ.",story:"تراث سلاطين العصور الذهبية.",price:"24.000 د.ك",oldPrice:"28.000 د.ك",stock:"متوفر",featured:"yes",image:"2.jpg"},
+    {id:3,name:"ترابيزة بوف السلطان صلاح الدين",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة بوف فخمة مطعمة بصدف أصلي وأرابيسك هندسي متقن.",story:"تحفة فنية تروي بطولات التاريخ.",price:"58.000 د.ك",oldPrice:"65.000 د.ك",stock:"قيد الشحن",featured:"yes",image:"4.jpg"},
+    {id:4,name:"ترابيزة سفرة الملك فاروق",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة سفرة مصممة بطراز القصور الملكية العريقة.",story:"رقي وأناقة الملكية المصرية.",price:"55.000 د.ك",oldPrice:"62.000 د.ك",stock:"بالطلب",featured:"yes",image:"5.jpg"},
+    {id:5,name:"ترابيزة نجمة الملكة كليوباترا",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة بنقشة النجمة الإسلامية وتطعيم مكثف لعرق اللؤلؤ.",story:"سحر النجوم وأصالة الفن المصري.",price:"50.500 د.ك",oldPrice:"58.000 د.ك",stock:"متوفر",featured:"yes",image:"6.jpg"},
+    {id:6,name:"طقم مكتب الملك فاروق",cat:"أثاث مكتبي",royal:"👑 درة متحفية",desc:"طقم مكتب متكامل مشغول يدوياً بخشب الزان والصدف.",story:"وقار المكاتب القيادية والملكية.",price:"51.500 د.ك",oldPrice:"60.000 د.ك",stock:"متوفر",featured:"no",image:"7.jpg"},
+    {id:7,name:"مبخر الملكة حتشبسوت",cat:"مباخر",royal:"👑 درة متحفية",desc:"مبخرة ساعة رملية مزخرفة بالصدف الطبيعي والأحجار الأصيلة.",story:"عبير العصور الملكية العريقة.",price:"25.000 د.ك",oldPrice:"30.000 د.ك",stock:"متوفر",featured:"yes",image:"8.jpg"},
+    {id:8,name:"كرسي محمد علي باشا",cat:"أثاث ملكي",royal:"👑 درة متحفية",desc:"كرسي فخم بطراز عريق، تطعيم كامل بالصدف ووسادة وثير.",story:"هيبة ورفاهية المجالس الكبرى.",price:"76.000 د.ك",oldPrice:"85.000 د.ك",stock:"قيد الشحن",featured:"yes",image:"9.jpg"},
+    {id:9,name:"طقم السلطان قايتباي",cat:"أثاث ملكي",royal:"👑 درة المتحف الكبرى",desc:"طقم جلسة ملكي متكامل مشغول بعرق اللؤلؤ وأرابيسك دمياط.",story:"قمة الإبداع الحرفي اليدوي.",price:"159.500 د.ك",oldPrice:"180.000 د.ك",stock:"بالطلب",featured:"yes",image:"10.jpg"},
+    {id:10,name:"شطرنج رمسيس الثاني",cat:"طاولات زهر وشطرنج",royal:"👑 درة متحفية",desc:"طاولة شطرنج وزهر بقطع عظم جمل خرط يدوي وبورد صدف.",story:"متعة الملوك الاستراتيجية.",price:"63.000 د.ك",oldPrice:"75.000 د.ك",stock:"متوفر",featured:"yes",image:"11.jpg"}
+  ];
+}
+products = rawProducts;
+renderAll();
 
   // إغلاق قائمة الموبايل لو كانت مفتوحة
   document.getElementById('mainNav')?.classList.remove('open');
