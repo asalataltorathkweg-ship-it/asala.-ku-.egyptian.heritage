@@ -736,10 +736,11 @@ const DEFAULT_SHIPPING = [
   {title:"✈️ دول الخليج",items:["السعودية، الإمارات، قطر، عمان، البحرين","المدة: 20-25 يوم عمل","تغليف خشبي خاص"]},
   {title:"🌍 الشحن الدولي",items:["جميع أنحاء العالم","شحن جوي مؤمن","تتبع الشحنة"]}
 ];
-const DEFAULT_ACCOUNT = {email:"admin@asala.com",pass:"asala123"};
+const DEFAULT_ACCOUNT = {email:"elsaftyahmed173@gmail.com",pass:"Asala@2026#Kw"};
 
 function load(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f;}catch(e){return f;}}
-let products = load('asala_products', DEFAULT_PRODUCTS);
+let products = [];
+fetch('backup.json').then(r => r.json()).then(d => { products = (d.products || d).filter(p => p.image && !p.image.includes('base64') && p.image.trim() !== ''); renderAll(); });
 fetch('products.json').then(r => r.json()).then(d => { 
   let allProds = d.products || d; 
   products = allProds.filter(p => p.image && !p.image.includes('base64') && p.image.trim() !== ''); 
