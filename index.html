@@ -555,22 +555,6 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
 
 <script>
 // ============================================
-// قائمة المنتجات المخفية (اللي مش عايزها تظهر)
-// ============================================
-const HIDDEN_PRODUCTS = [
-  "صندوق مستطيل ورد",
-  "علبة قبة شامي",
-  "علبة بومبيه أبيض",
-  "صندوق مثمن بيضاوي",
-  "صندوق مخدة مستطيلة",
-  "برواز سورة الفلق",
-  "صندوق بومبيه",
-  "برواز سورة الإخلاص",
-  "برواز آية الكرسي",
-  "ترابيزة مسدسة 3 بوف"
-];
-
-// ============================================
 // البيانات الافتراضية
 // ============================================
 const DEFAULT_PRODUCTS = [
@@ -610,10 +594,7 @@ const DEFAULT_ACCOUNT = {email:"elsaftyahmed173@gmail.com",pass:"Asalty@2026"};
 
 function load(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f;}catch(e){return f;}}
 
-// ⬇️⬇️⬇️ السطرين دول هما اللي بيخلوا الموقع يتجاهل المنتجات المخفية
-let allProducts = load('asala_products', DEFAULT_PRODUCTS);
-let products = allProducts.filter(p => !HIDDEN_PRODUCTS.includes(p.name));
-
+let products = load('asala_products', DEFAULT_PRODUCTS);
 let settings = load('asala_settings', DEFAULT_SETTINGS);
 let reviews = load('asala_reviews', DEFAULT_REVIEWS);
 let media = load('asala_media', DEFAULT_MEDIA);
