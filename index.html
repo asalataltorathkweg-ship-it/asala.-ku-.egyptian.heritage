@@ -555,52 +555,59 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
 
 <script>
 // ============================================
-// البيانات الافتراضية
+// سحب المنتجات من ملف products.json
 // ============================================
-const DEFAULT_PRODUCTS = [
-  {id:1,name:"طقم صواني الملكة نفرتيتي",cat:"صواني تقديم",royal:"👑 درة متحفية",desc:"طقم صواني تقديم فاخر مطعم بالصدف الطبيعي بتصميم نفرتيتي العريق.",story:"فخامة الضيافة الملكية بتفاصيل يدوية دقيقة.",price:"22.000 د.ك",oldPrice:"26.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"1.jpg"},
-  {id:2,name:"طقم صواني السلطان سليمان القانوني",cat:"صواني تقديم",royal:"👑 درة متحفية",desc:"صواني تقديم عريقة مشغولة بأفخم تطعيمات عرق اللؤلؤ.",story:"تراث سلاطين العصور الذهبية.",price:"24.000 د.ك",oldPrice:"28.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"2.jpg"},
-  {id:3,name:"ترابيزة بوف السلطان صلاح الدين",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة بوف فخمة مطعمة بصدف أصلي وأرابيسك هندسي متقن.",story:"تحفة فنية تروي بطولات التاريخ.",price:"58.000 د.ك",oldPrice:"65.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"4.jpg"},
-  {id:4,name:"ترابيزة سفرة الملك فاروق",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة سفرة مصممة بطراز القصور الملكية العريقة.",story:"رقي وأناقة الملكية المصرية.",price:"55.000 د.ك",oldPrice:"62.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"5.jpg"},
-  {id:5,name:"ترابيزة نجمة الملكة كليوباترا",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة بنقشة النجمة الإسلامية وتطعيم مكثف لعرق اللؤلؤ.",story:"سحر النجوم وأصالة الفن المصري.",price:"50.500 د.ك",oldPrice:"58.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"6.jpg"}
-];
+let products = [];
+let settings = {};
+let reviews = [];
+let media = {};
+let shipping = [];
+let account = {};
+let cart = [];
 
-const DEFAULT_SETTINGS = {
-  name:"أصالة التراث المصري",
-  slogan:"عاشق ومعشوق — متحف الإنتيك والتحف الملكية",
-  topbar:"🏛️ متحف أصالة التراث — تحف ملكية وإنتيكات من قلب مصر إلى الكويت والخليج والعالم — الشحنة القادمة خلال 20 يوم",
-  wa:"96551118069",
-  email:"elsaftyahmed173@gmail.com",
-  fb:"https://www.facebook.com/share/1ddcccaFpo/",
-  ig:"https://www.instagram.com/asalat.al.torath.kw.eg",
-  tt:"https://www.tiktok.com/@user1178392961513",
-  reviewsTitle:"⭐ آراء عملائنا في الكويت والخليج",
-  reviewsSub:"ثقة واعتزاز بخدمة قادتنا وكبار عملائنا"
-};
+// دالة لجلب البيانات من ملف products.json
+async function loadData() {
+  try {
+    const response = await fetch('products.json');
+    const data = await response.json();
+    
+    // لو الملف فيه بيانات المنتجات، هنستخدمها
+    if(data.products && data.products.length > 0) {
+      products = data.products;
+      settings = data.settings || {};
+      reviews = data.reviews || [];
+      media = data.media || {};
+      shipping = data.shipping || [];
+      account = data.account || {};
+    } else {
+      // لو الملف فاضي، هنستخدم البيانات الافتراضية
+      loadDefaults();
+    }
+  } catch (error) {
+    // لو الملف مش موجود أو فيه مشكلة، هنستخدم البيانات الافتراضية
+    console.error("خطأ في تحميل البيانات:", error);
+    loadDefaults();
+  }
+  
+  // تشغيل الموقع بعد تحميل البيانات
+  applySettings();
+  renderAll();
+}
 
-const DEFAULT_REVIEWS = [
-  {name:"أبو عبدالله",location:"الكويت",text:"الشغل فخم والصدف أصلي، فرشت ديوانيتي بالكامل من عندهم والتسليم كان بموعده exact.",stars:5},
-  {name:"أم سارة",location:"الكويت",text:"طلبت طقم النجمة الخضرا هدية، التغليف ملكي والشغل على الطبيعة أحلى بكتير من الصور!",stars:5},
-  {name:"أبو محمد",location:"المباركية",text:"تاجر جملة، بتعامل معاهم في مباخر الساعة الرملية، التزام تام وجودة لا تضاهى.",stars:5}
-];
-
-const DEFAULT_MEDIA = {logo:"22.jpg",hero:"cover.jpg"};
-const DEFAULT_SHIPPING = [
-  {title:"🇰🇼 داخل الكويت",items:["المدة: 20-25 يوم عمل (شحن من مصر)","توصيل لجميع المناطق","الدفع عند الاستلام"]},
-  {title:"✈️ دول الخليج",items:["السعودية، الإمارات، قطر، عمان، البحرين","المدة: 20-25 يوم عمل","تغليف خشبي خاص"]},
-  {title:"🌍 الشحن الدولي",items:["جميع أنحاء العالم","شحن جوي مؤمن","تتبع الشحنة"]}
-];
-const DEFAULT_ACCOUNT = {email:"elsaftyahmed173@gmail.com",pass:"Asalty@2026"};
-
-function load(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f;}catch(e){return f;}}
-
-let products = load('asala_products', DEFAULT_PRODUCTS);
-let settings = load('asala_settings', DEFAULT_SETTINGS);
-let reviews = load('asala_reviews', DEFAULT_REVIEWS);
-let media = load('asala_media', DEFAULT_MEDIA);
-let shipping = load('asala_shipping', DEFAULT_SHIPPING);
-let account = load('asala_account', DEFAULT_ACCOUNT);
-let cart = load('asala_cart', []);
+function loadDefaults() {
+  products = [
+    {id:1,name:"طقم صواني الملكة نفرتيتي",cat:"صواني تقديم",royal:"👑 درة متحفية",desc:"طقم صواني تقديم فاخر مطعم بالصدف الطبيعي بتصميم نفرتيتي العريق.",story:"فخامة الضيافة الملكية بتفاصيل يدوية دقيقة.",price:"22.000 د.ك",oldPrice:"26.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"1.jpg"},
+    {id:2,name:"طقم صواني السلطان سليمان القانوني",cat:"صواني تقديم",royal:"👑 درة متحفية",desc:"صواني تقديم عريقة مشغولة بأفخم تطعيمات عرق اللؤلؤ.",story:"تراث سلاطين العصور الذهبية.",price:"24.000 د.ك",oldPrice:"28.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"2.jpg"},
+    {id:3,name:"ترابيزة بوف السلطان صلاح الدين",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة بوف فخمة مطعمة بصدف أصلي وأرابيسك هندسي متقن.",story:"تحفة فنية تروي بطولات التاريخ.",price:"58.000 د.ك",oldPrice:"65.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"4.jpg"},
+    {id:4,name:"ترابيزة سفرة الملك فاروق",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة سفرة مصممة بطراز القصور الملكية العريقة.",story:"رقي وأناقة الملكية المصرية.",price:"55.000 د.ك",oldPrice:"62.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"5.jpg"},
+    {id:5,name:"ترابيزة نجمة الملكة كليوباترا",cat:"ترابيزات",royal:"👑 درة متحفية",desc:"ترابيزة بنقشة النجمة الإسلامية وتطعيم مكثف لعرق اللؤلؤ.",story:"سحر النجوم وأصالة الفن المصري.",price:"50.500 د.ك",oldPrice:"58.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"6.jpg"}
+  ];
+  settings = {name:"أصالة التراث المصري",slogan:"عاشق ومعشوق — متحف الإنتيك والتحف الملكية",topbar:"🏛️ متحف أصالة التراث — تحف ملكية وإنتيكات من قلب مصر إلى الكويت والخليج والعالم — الشحنة القادمة خلال 20 يوم",wa:"96551118069",email:"elsaftyahmed173@gmail.com",fb:"#",ig:"#",tt:"#",reviewsTitle:"⭐ آراء عملائنا في الكويت والخليج",reviewsSub:"ثقة واعتزاز بخدمة قادتنا وكبار عملائنا"};
+  reviews = [{name:"أبو عبدالله",location:"الكويت",text:"الشغل فخم والصدف أصلي، فرشت ديوانيتي بالكامل من عندهم والتسليم كان بموعده exact.",stars:5},{name:"أم سارة",location:"الكويت",text:"طلبت طقم النجمة الخضرا هدية، التغليف ملكي والشغل على الطبيعة أحلى بكتير من الصور!",stars:5}];
+  media = {logo:"22.jpg",hero:"cover.jpg"};
+  shipping = [{title:"🇰🇼 داخل الكويت",items:["المدة: 20-25 يوم عمل (شحن من مصر)","توصيل لجميع المناطق","الدفع عند الاستلام"]},{title:"✈️ دول الخليج",items:["السعودية، الإمارات، قطر، عمان، البحرين","المدة: 20-25 يوم عمل","تغليف خشبي خاص"]}];
+  account = {email:"elsaftyahmed173@gmail.com",pass:"Asalty@2026"};
+}
 
 let currentCategory='الكل', currentSearch='', currentPage=1;
 const itemsPerPage=12;
@@ -618,16 +625,18 @@ function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 function toggleMobileMenu(){ document.getElementById('mainNav')?.classList.toggle('open'); }
 
 function applySettings(){
-  document.getElementById('storeName').textContent=settings.name;
-  document.getElementById('sloganText').textContent=settings.slogan;
-  document.getElementById('footerName').textContent=settings.name;
-  document.getElementById('footerEmail').textContent=settings.email;
-  document.getElementById('reviewsTitle').textContent=settings.reviewsTitle||'⭐ آراء عملائنا';
-  document.getElementById('reviewsSub').textContent=settings.reviewsSub||'ثقة واعتزاز بخدمة قادتنا';
+  if(settings.name) document.getElementById('storeName').textContent=settings.name;
+  if(settings.slogan) document.getElementById('sloganText').textContent=settings.slogan;
+  if(settings.name) document.getElementById('footerName').textContent=settings.name;
+  if(settings.email) document.getElementById('footerEmail').textContent=settings.email;
+  if(settings.reviewsTitle) document.getElementById('reviewsTitle').textContent=settings.reviewsTitle;
+  if(settings.reviewsSub) document.getElementById('reviewsSub').textContent=settings.reviewsSub;
   const wa=`https://wa.me/${settings.wa}`;
-  document.getElementById('footerWa').href=wa; document.getElementById('waFloatBtn').href=wa;
-  document.getElementById('footerFb').href=settings.fb; document.getElementById('footerIg').href=settings.ig; document.getElementById('footerTt').href=settings.tt;
-  document.getElementById('topbarTrack').innerHTML=`<span>${settings.topbar}</span><span>${settings.topbar}</span>`;
+  if(settings.wa) { document.getElementById('footerWa').href=wa; document.getElementById('waFloatBtn').href=wa; }
+  if(settings.fb) document.getElementById('footerFb').href=settings.fb;
+  if(settings.ig) document.getElementById('footerIg').href=settings.ig;
+  if(settings.tt) document.getElementById('footerTt').href=settings.tt;
+  if(settings.topbar) document.getElementById('topbarTrack').innerHTML=`<span>${settings.topbar}</span><span>${settings.topbar}</span>`;
   if(media.logo) document.getElementById('brandLogo').src=media.logo;
   if(media.hero) document.getElementById('heroImg').src=media.hero;
 }
@@ -667,8 +676,12 @@ function createCard(p){
 
 function renderAll(){
   applySettings();
+  if(products.length===0) return;
+  
   const feat=products.filter(p=>p.featured==='yes');
-  document.getElementById('featuredGrid').innerHTML=feat.map(createCard).join('');
+  const featuredGrid = document.getElementById('featuredGrid');
+  if(featuredGrid) featuredGrid.innerHTML=feat.map(createCard).join('');
+  
   let filtered=products.filter(p=>{
     const mc=currentCategory==='الكل'||p.cat===currentCategory;
     const ms=(p.name||'').toLowerCase().includes(currentSearch.toLowerCase())|| (p.desc||'').toLowerCase().includes(currentSearch.toLowerCase());
@@ -677,7 +690,9 @@ function renderAll(){
   const tp=Math.ceil(filtered.length/itemsPerPage)||1;
   if(currentPage>tp)currentPage=1;
   const start=(currentPage-1)*itemsPerPage;
-  document.getElementById('productsGrid').innerHTML=filtered.slice(start,start+itemsPerPage).map(createCard).join('');
+  const prodGrid = document.getElementById('productsGrid');
+  if(prodGrid) prodGrid.innerHTML=filtered.slice(start,start+itemsPerPage).map(createCard).join('');
+  
   renderPagination(tp);
   renderReviews();
   renderShipping();
@@ -686,6 +701,7 @@ function renderAll(){
 
 function renderPagination(tp){
   const c=document.getElementById('paginationContainer');
+  if(!c) return;
   if(tp<=1){c.innerHTML='';return;}
   let h=`<button class="page-btn" onclick="goToPage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
   for(let i=1;i<=tp;i++){
@@ -711,13 +727,18 @@ function filterProducts(){currentSearch=document.getElementById('searchInput').v
 function openModal(id){
   const p=products.find(x=>x.id===id);if(!p)return;
   activeProduct=p;
-  document.getElementById('modalImgContainer').innerHTML=`<img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/600x600/c4a76b/0b0908?text=🏛️'">`;
-  document.getElementById('modalRoyal').textContent=p.royal||'👑 درة متحفية';
-  document.getElementById('modalTitle').textContent=p.name;
-  document.getElementById('modalDesc').textContent=p.desc||'';
-  document.getElementById('modalStory').textContent=p.story?'📖 '+p.story:'';
-  document.getElementById('modalPrice').textContent=p.price;
-  document.getElementById('clientName').value=''; document.getElementById('clientPhone').value=''; document.getElementById('clientAddress').value='';
+  const imgContainer = document.getElementById('modalImgContainer');
+  if(imgContainer) imgContainer.innerHTML=`<img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/600x600/c4a76b/0b0908?text=🏛️'">`;
+  const modalRoyal = document.getElementById('modalRoyal');
+  if(modalRoyal) modalRoyal.textContent=p.royal||'👑 درة متحفية';
+  const modalTitle = document.getElementById('modalTitle');
+  if(modalTitle) modalTitle.textContent=p.name;
+  const modalDesc = document.getElementById('modalDesc');
+  if(modalDesc) modalDesc.textContent=p.desc||'';
+  const modalStory = document.getElementById('modalStory');
+  if(modalStory) modalStory.textContent=p.story?'📖 '+p.story:'';
+  const modalPrice = document.getElementById('modalPrice');
+  if(modalPrice) modalPrice.textContent=p.price;
   document.getElementById('productModal').classList.add('open');
 }
 function closeModal(){document.getElementById('productModal').classList.remove('open');}
@@ -768,8 +789,10 @@ function parsePrice(p){return parseFloat((p||'0').replace(/[^\d.]/g,''))||0;}
 
 function renderCart(){
   const c=cart.reduce((s,x)=>s+x.qty,0);
-  document.getElementById('cartCount').textContent=c;
+  const cartCount = document.getElementById('cartCount');
+  if(cartCount) cartCount.textContent=c;
   const box=document.getElementById('cartItems');
+  if(!box) return;
   if(cart.length===0){ box.innerHTML=`<div class="cart-empty"><div style="font-size:48px;">🛒</div><p>السلة فارغة</p><p style="font-size:13px;">أضف تحفاً من المعرض</p></div>`; document.getElementById('cartTotal').textContent='0 د.ك';return; }
   box.innerHTML=cart.map(x=>`
     <div class="cart-item">
@@ -778,7 +801,8 @@ function renderCart(){
       <button class="remove-item" onclick="removeFromCart(${x.id})">🗑️</button>
     </div>`).join('');
   const total=cart.reduce((s,x)=>s+parsePrice(x.price)*x.qty,0);
-  document.getElementById('cartTotal').textContent=total.toFixed(3)+' د.ك';
+  const cartTotal = document.getElementById('cartTotal');
+  if(cartTotal) cartTotal.textContent=total.toFixed(3)+' د.ك';
 }
 function checkoutCart(){
   if(cart.length===0){alert('السلة فارغة!');return;}
@@ -789,7 +813,9 @@ function checkoutCart(){
 }
 
 function renderShipping(){
-  document.getElementById('deliveryGrid').innerHTML=shipping.map(s=>`<div class="delivery-card"><h3>${s.title}</h3><ul>${s.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+  const grid = document.getElementById('deliveryGrid');
+  if(!grid) return;
+  grid.innerHTML=shipping.map(s=>`<div class="delivery-card"><h3>${s.title}</h3><ul>${s.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
 }
 
 function openLoginModal(){document.getElementById('loginModal').classList.add('open');}
@@ -843,10 +869,10 @@ async function handleHeroUpload(event){
 
 function fillAdminForms(){
   renderAdminList();
-  document.getElementById('set-name').value=settings.name; document.getElementById('set-slogan').value=settings.slogan; document.getElementById('set-topbar').value=settings.topbar; document.getElementById('set-wa').value=settings.wa; document.getElementById('set-email').value=settings.email;
+  document.getElementById('set-name').value=settings.name||''; document.getElementById('set-slogan').value=settings.slogan||''; document.getElementById('set-topbar').value=settings.topbar||''; document.getElementById('set-wa').value=settings.wa||''; document.getElementById('set-email').value=settings.email||'';
   const logoPreview = document.getElementById('logo-preview'); if(media.logo){ logoPreview.src = media.logo; logoPreview.classList.add('show'); } else { logoPreview.classList.remove('show'); }
   const heroPreview = document.getElementById('hero-preview'); if(media.hero){ heroPreview.src = media.hero; heroPreview.classList.add('show'); } else { heroPreview.classList.remove('show'); }
-  renderReviewsEditor(); document.getElementById('acc-email').value=account.email; document.getElementById('acc-pass').value='';
+  renderReviewsEditor(); document.getElementById('acc-email').value=account.email||''; document.getElementById('acc-pass').value='';
 }
 
 function renderReviewsEditor(){
@@ -866,8 +892,9 @@ function deleteReview(i){ if(!confirm('حذف هذا الرأي؟')) return; rev
 function saveReviews(){ localStorage.setItem('asala_reviews', JSON.stringify(reviews)); renderReviews(); }
 
 function renderAdminList(){
-  document.getElementById('prodCount').textContent=products.length;
-  document.getElementById('adminProductsList').innerHTML=products.map(p=>`
+  const list = document.getElementById('adminProductsList'); if(!list) return;
+  const count = document.getElementById('prodCount'); if(count) count.textContent=products.length;
+  list.innerHTML=products.map(p=>`
     <div class="admin-product-row">
       <div style="flex:1;min-width:180px;"><b>🏛️ ${p.name}</b><br><span style="color:var(--wine);font-weight:800;">${p.price}</span><span style="color:var(--muted);font-size:12px;">(${p.stock} — ${p.cat})</span></div>
       <div><button class="btn-sm" onclick="editProduct(${p.id})">✏️</button><button class="btn-danger" onclick="deleteProduct(${p.id})">🗑️</button></div>
@@ -880,7 +907,7 @@ function saveProductData(){
   const imageVal = document.getElementById('p-image-val').value;
   const data={ id:eid?parseInt(eid):Date.now(), name,cat:document.getElementById('p-cat').value, royal:document.getElementById('p-royal').value||'👑 درة متحفية', desc:document.getElementById('p-desc').value, story:document.getElementById('p-story').value, price,oldPrice:document.getElementById('p-old').value, featured:document.getElementById('p-featured').value, image:imageVal||'https://via.placeholder.com/600x400/c4a76b/0b0908?text=🏛️', stock:document.getElementById('p-stock').value };
   if(eid){ const i=products.findIndex(p=>p.id===parseInt(eid)); if(i!==-1){ if(!imageVal) data.image = products[i].image; products[i]=data; } }else products.unshift(data);
-  try { localStorage.setItem('asala_products',JSON.stringify(products)); } catch(e){ alert('⚠️ مساحة التخزين امتلأت!'); return; }
+  localStorage.setItem('asala_products',JSON.stringify(products)); 
   renderAll();renderAdminList();resetForm();showToast('✅ تم الحفظ!');
 }
 
@@ -912,11 +939,13 @@ document.getElementById('brandTrigger').addEventListener('click',(e)=>{ e.preven
 document.addEventListener('keydown',(e)=>{ if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a'||e.key==='ش')){e.preventDefault();openLoginModal();} });
 
 function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg;t.style.display='block'; setTimeout(()=>{t.style.display='none';},2500); }
-function initCatPills(){ const cats=['الكل','ترابيزات','طاولات زهر وشطرنج','صناديق وشكمجيات','صواني تقديم','مباخر','أثاث مكتبي','لوحات قرآنية وبراويز','أثاث ملكي','ديكورات']; document.getElementById('catPills').innerHTML=cats.map((c,i)=>`<button class="cat-pill ${i===0?'active':''}" onclick="setCategory('${c}',this)">${c}</button>`).join(''); }
+function initCatPills(){ const cats=['الكل','ترابيزات','طاولات زهر وشطرنج','صناديق وشكمجيات','صواني تقديم','مباخر','أثاث مكتبي','لوحات قرآنية وبراويز','أثاث ملكي','ديكورات']; const pills = document.getElementById('catPills'); if(pills) pills.innerHTML=cats.map((c,i)=>`<button class="cat-pill ${i===0?'active':''}" onclick="setCategory('${c}',this)">${c}</button>`).join(''); }
 window.addEventListener('scroll', () => { const btn = document.getElementById('backToTop'); if(btn) btn.classList.toggle('show', window.scrollY > 500); });
 document.addEventListener('click', (e) => { const nav = document.getElementById('mainNav'); const toggle = document.querySelector('.menu-toggle'); if(nav && nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)){ nav.classList.remove('open'); } });
 document.getElementById('yearSpan').textContent=new Date().getFullYear();
-document.addEventListener('DOMContentLoaded',()=>{ initCatPills(); renderAll(); });
+
+// تشغيل الموقع
+document.addEventListener('DOMContentLoaded',()=>{ initCatPills(); loadData(); });
 </script>
 </body>
 </html>
