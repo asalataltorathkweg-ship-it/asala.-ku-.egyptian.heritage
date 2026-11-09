@@ -40,18 +40,10 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
 .nav{display:flex;gap:16px;font-weight:700;font-size:14px;color:var(--ivory);flex-wrap:wrap;align-items:center}
 .nav a{transition:.3s;padding:6px 10px;border-radius:8px;cursor:pointer;position:relative}
 .nav a:hover{color:var(--gold);background:rgba(196,167,107,.1)}
-.nav a::after{content:'';position:absolute;bottom:2px;right:10px;left:10px;height:2px;background:var(--gold);transform:scaleX(0);transition:.3s}
-.nav a:hover::after{transform:scaleX(1)}
-
 .menu-toggle{display:none;background:transparent;color:var(--gold-light);font-size:26px;padding:6px 12px;border:1px solid var(--line);border-radius:8px}
-
 .cart-btn{background:var(--gold);color:var(--black);padding:8px 14px;border-radius:30px;font-weight:800;display:flex;align-items:center;gap:6px;transition:.3s}
 .cart-btn:hover{background:var(--gold-light);transform:translateY(-2px)}
 .cart-count{background:var(--wine);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px}
-
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:5px}
-.hero-ctas .btn-gold{transition:.3s}
-.hero-ctas .btn-gold:hover{transform:translateY(-3px) scale(1.02)}
 
 .hero{position:relative;height:78vh;min-height:520px;overflow:hidden;background:var(--black);display:flex;align-items:flex-end}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.62}
@@ -61,6 +53,8 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
 .hero-overlay p{font-size:17px;max-width:720px;opacity:.95;margin-bottom:30px;color:var(--ivory)}
 .btn-gold{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 36px;border-radius:50px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--black);box-shadow:0 10px 30px rgba(196,167,107,.45);transition:.3s;font-size:16px}
 .btn-gold:hover{transform:translateY(-3px);box-shadow:0 15px 45px rgba(196,167,107,.65)}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:768px){.hero-ctas .btn-gold{width:100%}}
 
 .trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));background:var(--ivory-soft);border:1px solid var(--line);border-radius:var(--radius);max-width:1450px;margin:30px auto 55px;padding:30px;gap:20px;box-shadow:0 10px 30px rgba(11,9,8,.06)}
 .trust-item{display:flex;gap:14px;align-items:center;text-align:right}
@@ -154,7 +148,6 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
 
 .story-full-section{background:linear-gradient(135deg,#0b0908 0%,#1a0f0a 100%);color:var(--ivory);padding:90px 20px;margin:60px 0;position:relative;overflow:hidden}
 .story-full-section::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(196,167,107,.15),transparent 50%),radial-gradient(circle at 80% 80%,rgba(109,34,48,.2),transparent 50%);pointer-events:none}
-.story-full-section::after{content:"🏛️";position:absolute;font-size:300px;opacity:.03;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
 .story-full-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
 .story-full-head{text-align:center;margin-bottom:50px}
 .story-tag{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--black);padding:8px 22px;border-radius:30px;font-size:13px;font-weight:900;letter-spacing:1px;margin-bottom:20px;box-shadow:0 8px 25px rgba(196,167,107,.3)}
@@ -241,9 +234,6 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
 .btn-danger{background:#c0392b;color:#fff;padding:7px 12px;border-radius:7px;font-weight:800;font-size:12px}
 .admin-product-row{display:flex;justify-content:space-between;align-items:center;background:#faf6f0;padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eae5de;flex-wrap:wrap;gap:8px}
 .field-label{font-size:13px;font-weight:700;color:var(--wine-deep);margin-bottom:4px;display:block}
-.color-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-.color-item{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:700}
-.color-item input[type=color]{width:50px;height:50px;border:none;border-radius:10px;cursor:pointer;background:none}
 .login-box{max-width:400px;margin:0 auto;text-align:center}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--black);color:var(--gold-light);padding:12px 22px;border-radius:30px;font-weight:800;display:none;z-index:9999;border:1px solid var(--gold)}
 
@@ -256,14 +246,11 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
 .image-preview{width:100%;height:180px;object-fit:cover;border-radius:10px;border:1px solid var(--line);margin-bottom:10px;background:#efe6d3;display:none}
 .image-preview.show{display:block}
 
-.footer-link{cursor:pointer}
-
 @media(max-width:900px){
   .menu-toggle{display:block}
   .nav{display:none;position:absolute;top:100%;right:0;left:0;background:var(--black);flex-direction:column;padding:20px;gap:8px;border-top:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:99}
   .nav.open{display:flex}
   .nav a{padding:12px 16px;border-radius:8px;width:100%;text-align:right}
-  .nav a::after{display:none}
   .nav .cart-btn{width:100%;justify-content:center;margin-top:10px}
 }
 
@@ -271,8 +258,6 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
   .header{padding:12px 15px}
   .hero{height:62vh;min-height:420px}
   .hero-overlay{padding:35px 20px}
-  .hero-ctas{flex-direction:column;width:100%}
-  .hero-ctas .btn-gold{width:100%;padding:14px 20px;font-size:14px}
   .products-grid{grid-template-columns:1fr;padding:0 12px;gap:20px}
   .filter-bar{padding:0 12px}
   .search-input{width:100%}
@@ -281,10 +266,6 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
   .back-to-top{bottom:75px;left:15px;width:44px;height:44px}
   .product-img{height:250px}
   .admin-box{padding:20px}
-  .story-full-section{padding:60px 15px}
-  .story-full-text,.story-full-cats{padding:20px}
-  .story-quote p{font-size:16px}
-  .custom-order-form{padding:20px}
 }
 </style>
 </head>
@@ -300,17 +281,15 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
       <span id="sloganText">عاشق ومعشوق — متحف الإنتيك والتحف الملكية</span>
     </div>
   </div>
-  
   <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-  
   <nav class="nav" id="mainNav">
-    <a href="#featured" onclick="scrollToSection(event, 'featured')">درر المتحف</a>
-    <a href="#products" onclick="scrollToSection(event, 'products')">المعرض الكامل</a>
-    <a href="#story" onclick="scrollToSection(event, 'story')">حكاية الصنعة</a>
-    <a href="#reviews" onclick="scrollToSection(event, 'reviews')">آراء العملاء</a>
-    <a href="#customOrder" onclick="scrollToSection(event, 'customOrder')">اطلب تفصيل</a>
-    <a href="#delivery" onclick="scrollToSection(event, 'delivery')">الشحن</a>
-    <a href="#contact" onclick="scrollToSection(event, 'contact')">تواصل</a>
+    <a onclick="scrollToSection(event, 'featured')">درر المتحف</a>
+    <a onclick="scrollToSection(event, 'products')">المعرض الكامل</a>
+    <a onclick="scrollToSection(event, 'story')">حكاية الصنعة</a>
+    <a onclick="scrollToSection(event, 'reviews')">آراء العملاء</a>
+    <a onclick="scrollToSection(event, 'customOrder')">اطلب تفصيل</a>
+    <a onclick="scrollToSection(event, 'delivery')">الشحن</a>
+    <a onclick="scrollToSection(event, 'contact')">تواصل</a>
     <button class="cart-btn" onclick="openCart()">🛒 السلة <span class="cart-count" id="cartCount">0</span></button>
   </nav>
 </header>
@@ -322,9 +301,8 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
     <h2 id="heroTitle">متحف الإنتيك الملكي،<br>بين يديك في بيتك.</h2>
     <p id="heroDesc">نقدم لك أرقى القطع الفنية من عرق اللؤلؤ الأبيض وأفخم أخشاب الزان، بتطعيمات يدوية تنافس متاحف العالم.</p>
     <div class="hero-ctas">
-      <a href="#featured" onclick="scrollToSection(event, 'featured')" class="btn-gold">🏛️ جولة في القاعات</a>
-      <a href="#products" onclick="scrollToSection(event, 'products')" class="btn-gold" style="background:transparent;border:2px solid var(--gold);color:var(--gold-light);">👑 تصفح المعرض</a>
-      <a href="#customOrder" onclick="scrollToSection(event, 'customOrder')" class="btn-gold" style="background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;">📩 اطلب تفصيل</a>
+      <a onclick="scrollToSection(event, 'featured')" class="btn-gold">🏛️ جولة في القاعات</a>
+      <a onclick="scrollToSection(event, 'products')" class="btn-gold" style="background:transparent;border:2px solid var(--gold);color:var(--gold-light);">👑 تصفح المعرض</a>
     </div>
   </div>
 </section>
@@ -393,12 +371,8 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
     <p>تصميم وتصنيع خاص بالكامل حسب الطلب في ورشنا بدمياط</p>
   </div>
   <form class="custom-order-form" onsubmit="handleCustomOrder(event)">
-    <div>
-      <label>الاسم الكريم</label>
-      <input type="text" id="custOrderName" required placeholder="أدخل اسمك الكريم">
-    </div>
-    <div>
-      <label>نوع القطعة المطلوبة</label>
+    <div><label>الاسم الكريم</label><input type="text" id="custOrderName" required placeholder="أدخل اسمك الكريم"></div>
+    <div><label>نوع القطعة المطلوبة</label>
       <select id="custOrderCat">
         <option value="ترابيزات">ترابيزات</option>
         <option value="طاولات زهر وشطرنج">طاولات زهر وشطرنج</option>
@@ -411,10 +385,7 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
         <option value="ديكورات">ديكورات</option>
       </select>
     </div>
-    <div>
-      <label>المقاسات والملاحظات المطلوبة</label>
-      <textarea id="custOrderNote" rows="4" placeholder="اكتب المقاسات واللون والتفاصيل..."></textarea>
-    </div>
+    <div><label>المقاسات والملاحظات المطلوبة</label><textarea id="custOrderNote" rows="4" placeholder="اكتب المقاسات واللون والتفاصيل..."></textarea></div>
     <button type="submit" class="btn-wa" style="padding:16px;font-size:16px;border-radius:12px;">📩 إرسال طلب التفصيل عبر الواتساب</button>
   </form>
 </section>
@@ -430,7 +401,6 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
         <p id="modalDesc" style="color:var(--muted);font-size:14px;margin:8px 0;line-height:1.7;"></p>
         <div class="story" id="modalStory"></div>
         <div class="price" id="modalPrice"></div>
-        <div id="modalUrgency" style="display:none;background:linear-gradient(135deg,#fef3e2,#fde8cc);border:1px solid #e67e22;border-radius:8px;padding:10px;font-size:12px;font-weight:700;color:#a04000;margin:8px 0;text-align:center;"></div>
       </div>
       <div class="checkout-form">
         <h4>📋 احجز تحفتك الآن</h4>
@@ -442,7 +412,7 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
           <option value="خارج الكويت">خارج الكويت</option>
           <option value="استلام من الفرع">استلام من الفرع</option>
         </select>
-        <button class="btn-wa" onclick="submitOrderViaWa()">💬 احجز الآن — يصل خلال 20 يوم</button>
+        <button class="btn-wa" onclick="submitOrderViaWa()">💬 احجز الآن</button>
       </div>
     </div>
   </div>
@@ -454,38 +424,33 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer">
     <div class="cart-total"><span>الإجمالي:</span><span id="cartTotal">0 د.ك</span></div>
-    <button class="btn-wa" onclick="checkoutCart()">💬 إتمام الحجز عبر واتساب</button>
+    <button class="btn-wa" onclick="checkoutCart()">💬 إتمام الحجز</button>
   </div>
 </div>
 
 <section class="delivery-section" id="delivery">
-  <div class="section-title" style="margin:15px 0;">
-    <span class="ornament">✦ ✦ ✦</span>
-    <h2>الشحن وتغليف القصور</h2>
-    <p>نصل بتحفتك إلى أي مكان في العالم</p>
-  </div>
+  <div class="section-title" style="margin:15px 0;"><span class="ornament">✦ ✦ ✦</span><h2>الشحن والتغليف</h2></div>
   <div class="delivery-grid" id="deliveryGrid"></div>
 </section>
 
 <footer class="footer" id="contact">
   <div class="footer-content">
     <div><h4 id="footerName">أصالة التراث المصري</h4><p>متحف الإنتيك والتحف الملكية — صُنع بفخر في مصر ✨</p></div>
-    <div><h4>تواصل معنا</h4><p>💬 واتساب: <a href="#" id="footerWa" target="_blank">+965 51118069</a></p><p>📧 <span id="footerEmail">elsaftyahmed173@gmail.com</span></p></div>
-    <div><h4>تابعنا</h4><a href="#" id="footerFb" target="_blank">📘 فيسبوك</a><a href="#" id="footerIg" target="_blank">📸 إنستجرام</a><a href="#" id="footerTt" target="_blank">🎵 تيك توك</a></div>
+    <div><h4>تواصل معنا</h4><p>💬 واتساب: <a href="#" id="footerWa">+965 51118069</a></p><p>📧 <span id="footerEmail">elsaftyahmed173@gmail.com</span></p></div>
+    <div><h4>تابعنا</h4><a href="#" id="footerFb">📘 فيسبوك</a><a href="#" id="footerIg">📸 إنستجرام</a><a href="#" id="footerTt">🎵 تيك توك</a></div>
   </div>
-  <div class="footer-copy">© <span id="yearSpan"></span> أصالة التراث المصري — جميع الحقوق محفوظة.</div>
+  <div class="footer-copy">© <span id="yearSpan"></span> أصالة التراث المصري</div>
 </footer>
 
 <div class="float-stack">
-  <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
-  <a href="#" id="waFloatBtn" target="_blank" class="wa-float" title="تواصل واتساب"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+  <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+  <a href="#" id="waFloatBtn" target="_blank" class="wa-float"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 </div>
 
 <div class="admin-modal" id="loginModal">
   <div class="admin-box login-box">
     <div class="admin-close" onclick="closeLoginModal()">✕</div>
     <h3 style="color:var(--wine);margin-bottom:8px;">👑 دخول المشرف</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">أدخل بياناتك للوصول للوحة التحكم</p>
     <input type="email" id="adminEmailInput" class="form-control" placeholder="البريد الإلكتروني" value="admin@asala.com">
     <input type="password" id="adminPassInput" class="form-control" placeholder="كلمة المرور" value="asala123">
     <button class="btn-admin" onclick="checkAdminLogin()">دخول لوحة التحكم</button>
@@ -499,12 +464,10 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
     <div class="admin-tabs">
       <button class="admin-tab-btn active" onclick="switchTab(event,'tab-prod')">1. المنتجات</button>
       <button class="admin-tab-btn" onclick="switchTab(event,'tab-settings')">2. الإعدادات</button>
-      <button class="admin-tab-btn" onclick="switchTab(event,'tab-reviews')">3. آراء العملاء</button>
-      <button class="admin-tab-btn" onclick="switchTab(event,'tab-design')">4. التصميم</button>
-      <button class="admin-tab-btn" onclick="switchTab(event,'tab-media')">5. الوسائط</button>
-      <button class="admin-tab-btn" onclick="switchTab(event,'tab-shipping')">6. الشحن</button>
-      <button class="admin-tab-btn" onclick="switchTab(event,'tab-backup')">7. النسخ الاحتياطي</button>
-      <button class="admin-tab-btn" onclick="switchTab(event,'tab-account')">8. الحساب</button>
+      <button class="admin-tab-btn" onclick="switchTab(event,'tab-reviews')">3. الآراء</button>
+      <button class="admin-tab-btn" onclick="switchTab(event,'tab-media')">4. الوسائط</button>
+      <button class="admin-tab-btn" onclick="switchTab(event,'tab-backup')">5. النسخ الاحتياطي</button>
+      <button class="admin-tab-btn" onclick="switchTab(event,'tab-account')">6. الحساب</button>
     </div>
 
     <div id="tab-prod" class="admin-tab-content active">
@@ -514,51 +477,34 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
         <input type="text" id="p-name" class="form-control" placeholder="اسم التحفة *">
         <div class="form-grid">
           <select id="p-cat" class="form-control">
-            <option value="ترابيزات">ترابيزات</option>
-            <option value="طاولات زهر وشطرنج">طاولات زهر وشطرنج</option>
-            <option value="صناديق وشكمجيات">صناديق وشكمجيات</option>
-            <option value="صواني تقديم">صواني تقديم</option>
-            <option value="مباخر">مباخر</option>
-            <option value="أثاث مكتبي">أثاث مكتبي</option>
-            <option value="لوحات قرآنية وبراويز">لوحات قرآنية وبراويز</option>
-            <option value="أثاث ملكي">أثاث ملكي</option>
+            <option value="ترابيزات">ترابيزات</option><option value="طاولات زهر وشطرنج">طاولات زهر وشطرنج</option>
+            <option value="صناديق وشكمجيات">صناديق وشكمجيات</option><option value="صواني تقديم">صواني تقديم</option>
+            <option value="مباخر">مباخر</option><option value="أثاث مكتبي">أثاث مكتبي</option>
+            <option value="لوحات قرآنية وبراويز">لوحات قرآنية وبراويز</option><option value="أثاث ملكي">أثاث ملكي</option>
             <option value="ديكورات">ديكورات</option>
           </select>
-          <input type="text" id="p-royal" class="form-control" placeholder="التصنيف (مثال: 👑 درة متحفية)">
+          <input type="text" id="p-royal" class="form-control" placeholder="التصنيف (درة متحفية)">
         </div>
         <textarea id="p-desc" class="form-control" placeholder="الوصف" rows="2"></textarea>
         <textarea id="p-story" class="form-control" placeholder="قصة القطعة" rows="2"></textarea>
         <div class="form-grid">
-          <input type="text" id="p-price" class="form-control" placeholder="السعر الحالي (د.ك) *">
-          <input type="text" id="p-old" class="form-control" placeholder="السعر السابق (د.ك)">
+          <input type="text" id="p-price" class="form-control" placeholder="السعر الحالي *">
+          <input type="text" id="p-old" class="form-control" placeholder="السعر السابق">
         </div>
         <div class="form-grid">
-          <select id="p-featured" class="form-control">
-            <option value="no">عادي</option>
-            <option value="yes">درة متحفية (الواجهة)</option>
-          </select>
-          <select id="p-stock" class="form-control">
-            <option value="قيد الشحن (20 يوم)">قيد الشحن (20 يوم)</option>
-            <option value="متوفر">متوفر</option>
-            <option value="قيد الشحن">قيد الشحن</option>
-            <option value="بالطلب">بالطلب</option>
-            <option value="طلب تفصيل">طلب تفصيل</option>
-            <option value="غير متوفر">غير متوفر</option>
-          </select>
+          <select id="p-featured" class="form-control"><option value="no">عادي</option><option value="yes">درة متحفية</option></select>
+          <select id="p-stock" class="form-control"><option value="قيد الشحن (20 يوم)">قيد الشحن (20 يوم)</option><option value="متوفر">متوفر</option><option value="بالطلب">بالطلب</option></select>
         </div>
-        <label class="field-label">🖼️ صورة التحفة</label>
         <div class="image-upload-box" onclick="document.getElementById('p-image-file').click()">
           <input type="file" id="p-image-file" accept="image/*" onchange="handleProductImageUpload(event)" style="display:none">
-          <div class="icon">📁</div>
-          <div class="text">اضغط لرفع صورة من جهازك</div>
-          <div class="hint">PNG, JPG, WEBP — يتم الضغط تلقائياً</div>
+          <div class="icon">📁</div><div class="text">اضغط لرفع صورة</div>
         </div>
-        <img id="p-image-preview" class="image-preview" alt="معاينة">
+        <img id="p-image-preview" class="image-preview">
         <input type="hidden" id="p-image-val">
         <button class="btn-admin" onclick="saveProductData()">💾 حفظ</button>
         <button class="btn-admin" style="background:#999;margin-top:6px;" onclick="resetForm()">🔄 إفراغ</button>
       </div>
-      <h3 style="font-family:var(--font-body);">التحف المعروضة (<span id="prodCount">0</span>)</h3>
+      <h3 style="font-family:var(--font-body);">التحف (<span id="prodCount">0</span>)</h3>
       <div id="adminProductsList"></div>
     </div>
 
@@ -566,94 +512,41 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
       <label class="field-label">اسم المتجر</label><input type="text" id="set-name" class="form-control">
       <label class="field-label">السلوغان</label><input type="text" id="set-slogan" class="form-control">
       <label class="field-label">الشريط العلوي</label><input type="text" id="set-topbar" class="form-control">
-      <label class="field-label">عنوان الغلاف</label><input type="text" id="set-heroTitle" class="form-control">
-      <label class="field-label">وصف الغلاف</label><input type="text" id="set-heroDesc" class="form-control">
-      <label class="field-label">رقم الواتساب (بصيغة دولية)</label><input type="text" id="set-wa" class="form-control">
-      <label class="field-label">البريد الإلكتروني</label><input type="email" id="set-email" class="form-control">
-      <div class="form-grid">
-        <div><label class="field-label">فيسبوك</label><input type="text" id="set-fb" class="form-control"></div>
-        <div><label class="field-label">إنستجرام</label><input type="text" id="set-ig" class="form-control"></div>
-      </div>
-      <label class="field-label">تيك توك</label><input type="text" id="set-tt" class="form-control">
-      <label class="field-label">نص حكاية الصنعة</label><textarea id="set-story" class="form-control" rows="3"></textarea>
-      <button class="btn-admin" onclick="saveSettings()">💾 حفظ الإعدادات</button>
+      <label class="field-label">رقم الواتساب</label><input type="text" id="set-wa" class="form-control">
+      <label class="field-label">البريد</label><input type="email" id="set-email" class="form-control">
+      <button class="btn-admin" onclick="saveSettings()">💾 حفظ</button>
     </div>
 
     <div id="tab-reviews" class="admin-tab-content">
-      <h3 style="font-family:var(--font-body);margin-bottom:12px;color:var(--wine);">⭐ إدارة آراء العملاء</h3>
-      <label class="field-label">عنوان القسم</label>
-      <input type="text" id="set-reviewsTitle" class="form-control" placeholder="⭐ آراء عملائنا في الكويت والخليج">
-      <label class="field-label">الوصف تحت العنوان</label>
-      <input type="text" id="set-reviewsSub" class="form-control" placeholder="ثقة واعتزاز بخدمة قادتنا وكبار عملائنا">
-      <div id="reviewsEditor" style="margin-top:20px;"></div>
-      <button class="btn-admin" style="background:#27ae60;margin-top:8px;" onclick="addReview()">➕ إضافة رأي جديد</button>
-      <button class="btn-admin" onclick="saveReviewsSettings()">💾 حفظ عنوان ووصف القسم</button>
-    </div>
-
-    <div id="tab-design" class="admin-tab-content">
-      <h3 style="font-family:var(--font-body);margin-bottom:12px;">الألوان</h3>
-      <div class="color-row">
-        <div class="color-item"><input type="color" id="col-black"><span>الأسود</span></div>
-        <div class="color-item"><input type="color" id="col-wine"><span>النبيتي</span></div>
-        <div class="color-item"><input type="color" id="col-gold"><span>الذهبي</span></div>
-        <div class="color-item"><input type="color" id="col-ivory"><span>البيج</span></div>
-      </div>
-      <label class="field-label">خط العناوين</label>
-      <select id="set-fontTitle" class="form-control">
-        <option value="'Amiri',serif">Amiri (كلاسيكي)</option>
-        <option value="'Cairo',sans-serif">Cairo</option>
-      </select>
-      <label class="field-label">خط النصوص</label>
-      <select id="set-fontBody" class="form-control">
-        <option value="'Cairo',sans-serif">Cairo (عصري)</option>
-        <option value="'Tajawal',sans-serif">Tajawal</option>
-      </select>
-      <button class="btn-admin" onclick="saveDesign()">💾 حفظ التصميم</button>
+      <div id="reviewsEditor"></div>
+      <button class="btn-admin" style="background:#27ae60;margin-top:8px;" onclick="addReview()">➕ إضافة رأي</button>
     </div>
 
     <div id="tab-media" class="admin-tab-content">
-      <h3 style="font-family:var(--font-body);margin-bottom:12px;color:var(--wine);">🖼️ اللوجو والغلاف</h3>
-      <label class="field-label">شعار المتحف (اللوجو)</label>
+      <label class="field-label">اللوجو</label>
       <div class="image-upload-box" onclick="document.getElementById('logo-file').click()">
         <input type="file" id="logo-file" accept="image/*" onchange="handleLogoUpload(event)" style="display:none">
-        <div class="icon">👑</div>
-        <div class="text">اضغط لرفع اللوجو من جهازك</div>
-        <div class="hint">PNG أو JPG — يفضل مربع 500×500</div>
+        <div class="icon">👑</div><div class="text">رفع اللوجو</div>
       </div>
-      <img id="logo-preview" class="image-preview" alt="معاينة اللوجو">
-      <button class="btn-admin" style="background:#c0392b;margin-bottom:20px;" onclick="removeLogo()">🗑️ حذف اللوجو الحالي</button>
+      <img id="logo-preview" class="image-preview">
       <hr style="margin:20px 0;border:none;border-top:1px solid var(--line);">
-      <label class="field-label">صورة الغلاف (Hero)</label>
+      <label class="field-label">الغلاف</label>
       <div class="image-upload-box" onclick="document.getElementById('hero-file').click()">
         <input type="file" id="hero-file" accept="image/*" onchange="handleHeroUpload(event)" style="display:none">
-        <div class="icon">🎬</div>
-        <div class="text">اضغط لرفع صورة الغلاف من جهازك</div>
-        <div class="hint">يفضل عرضية 1600×900 — JPG</div>
+        <div class="icon">🎬</div><div class="text">رفع الغلاف</div>
       </div>
-      <img id="hero-preview" class="image-preview" alt="معاينة الغلاف">
-      <button class="btn-admin" style="background:#c0392b;" onclick="removeHero()">🗑️ حذف صورة الغلاف الحالية</button>
-      <p style="font-size:12px;color:var(--muted);margin-top:15px;text-align:center;">💡 يتم ضغط الصور تلقائياً لتوفير مساحة التخزين</p>
-    </div>
-
-    <div id="tab-shipping" class="admin-tab-content">
-      <div id="shippingEditor"></div>
-      <button class="btn-admin" onclick="saveShipping()">💾 حفظ خيارات الشحن</button>
+      <img id="hero-preview" class="image-preview">
     </div>
 
     <div id="tab-backup" class="admin-tab-content">
-      <h3 style="font-family:var(--font-body);margin-bottom:12px;">💾 النسخ الاحتياطي</h3>
-      <button class="btn-admin" style="background:#27ae60;margin-bottom:16px;" onclick="exportData()">📥 تصدير كل البيانات (JSON)</button>
-      <label class="field-label">📤 استيراد ملف JSON</label>
-      <input type="file" class="form-control" accept=".json" onchange="importData(event)">
-      <p style="font-size:13px;color:var(--muted);margin-top:12px;">⚠️ الاستيراد سيستبدل جميع البيانات الحالية.</p>
+      <button class="btn-admin" style="background:#27ae60;" onclick="exportData()">📥 تصدير JSON</button>
+      <input type="file" class="form-control" accept=".json" onchange="importData(event)" style="margin-top:12px;">
     </div>
 
     <div id="tab-account" class="admin-tab-content">
-      <label class="field-label">البريد الإلكتروني</label>
-      <input type="email" id="acc-email" class="form-control">
-      <label class="field-label">كلمة المرور الجديدة</label>
-      <input type="password" id="acc-pass" class="form-control" placeholder="اتركها فارغة إن لم ترد التغيير">
-      <button class="btn-admin" onclick="saveAccount()">💾 حفظ الحساب</button>
+      <label class="field-label">البريد</label><input type="email" id="acc-email" class="form-control">
+      <label class="field-label">كلمة المرور</label><input type="password" id="acc-pass" class="form-control">
+      <button class="btn-admin" onclick="saveAccount()">💾 حفظ</button>
     </div>
   </div>
 </div>
@@ -661,9 +554,25 @@ h1,h2,h3,h4{font-family:var(--font-title);color:var(--black)}
 <div class="toast" id="toast"></div>
 
 <script>
-/* ============================================
-   البيانات الافتراضية (المحدثة والمنقحة)
-============================================ */
+// ============================================
+// قائمة المنتجات المخفية (اللي مش عايزها تظهر)
+// ============================================
+const HIDDEN_PRODUCTS = [
+  "صندوق مستطيل ورد",
+  "علبة قبة شامي",
+  "علبة بومبيه أبيض",
+  "صندوق مثمن بيضاوي",
+  "صندوق مخدة مستطيلة",
+  "برواز سورة الفلق",
+  "صندوق بومبيه",
+  "برواز سورة الإخلاص",
+  "برواز آية الكرسي",
+  "ترابيزة مسدسة 3 بوف"
+];
+
+// ============================================
+// البيانات الافتراضية
+// ============================================
 const DEFAULT_PRODUCTS = [
   {id:1,name:"طقم صواني الملكة نفرتيتي",cat:"صواني تقديم",royal:"👑 درة متحفية",desc:"طقم صواني تقديم فاخر مطعم بالصدف الطبيعي بتصميم نفرتيتي العريق.",story:"فخامة الضيافة الملكية بتفاصيل يدوية دقيقة.",price:"22.000 د.ك",oldPrice:"26.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"1.jpg"},
   {id:2,name:"طقم صواني السلطان سليمان القانوني",cat:"صواني تقديم",royal:"👑 درة متحفية",desc:"صواني تقديم عريقة مشغولة بأفخم تطعيمات عرق اللؤلؤ.",story:"تراث سلاطين العصور الذهبية.",price:"24.000 د.ك",oldPrice:"28.000 د.ك",stock:"قيد الشحن (20 يوم)",featured:"yes",image:"2.jpg"},
@@ -676,14 +585,11 @@ const DEFAULT_SETTINGS = {
   name:"أصالة التراث المصري",
   slogan:"عاشق ومعشوق — متحف الإنتيك والتحف الملكية",
   topbar:"🏛️ متحف أصالة التراث — تحف ملكية وإنتيكات من قلب مصر إلى الكويت والخليج والعالم — الشحنة القادمة خلال 20 يوم",
-  heroTitle:"متحف الإنتيك الملكي،\nبين يديك في بيتك.",
-  heroDesc:"نقدم لك أرقى القطع الفنية من عرق اللؤلؤ الأبيض وأفخم أخشاب الزان، بتطعيمات يدوية تنافس متاحف العالم. احجز قطعتك الآن — الشحنة القادمة خلال 20 يوم.",
   wa:"96551118069",
   email:"elsaftyahmed173@gmail.com",
   fb:"https://www.facebook.com/share/1ddcccaFpo/",
   ig:"https://www.instagram.com/asalat.al.torath.kw.eg",
   tt:"https://www.tiktok.com/@user1178392961513",
-  story:"تعد صناعة الصدف المصري واحدة من أعرق الحرف المحفوظة في المتاحف الكبرى. تعتمد على مزج خشب الزان الأصيل مع عرق اللؤلؤ الطبيعي المستخرج من البحار لإنتاج إنتيكات خالدة لا تزداد بمرور الزمن إلا قيمة وجمالاً.",
   reviewsTitle:"⭐ آراء عملائنا في الكويت والخليج",
   reviewsSub:"ثقة واعتزاز بخدمة قادتنا وكبار عملائنا"
 };
@@ -694,7 +600,6 @@ const DEFAULT_REVIEWS = [
   {name:"أبو محمد",location:"المباركية",text:"تاجر جملة، بتعامل معاهم في مباخر الساعة الرملية، التزام تام وجودة لا تضاهى.",stars:5}
 ];
 
-const DEFAULT_DESIGN = {black:"#0b0908",wine:"#6d2230",gold:"#c4a76b",ivory:"#f7f1e3",fontTitle:"'Amiri',serif",fontBody:"'Cairo',sans-serif"};
 const DEFAULT_MEDIA = {logo:"22.jpg",hero:"cover.jpg"};
 const DEFAULT_SHIPPING = [
   {title:"🇰🇼 داخل الكويت",items:["المدة: 20-25 يوم عمل (شحن من مصر)","توصيل لجميع المناطق","الدفع عند الاستلام"]},
@@ -704,10 +609,13 @@ const DEFAULT_SHIPPING = [
 const DEFAULT_ACCOUNT = {email:"elsaftyahmed173@gmail.com",pass:"Asalty@2026"};
 
 function load(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f;}catch(e){return f;}}
-let products = load('asala_products', DEFAULT_PRODUCTS);
+
+// ⬇️⬇️⬇️ السطرين دول هما اللي بيخلوا الموقع يتجاهل المنتجات المخفية
+let allProducts = load('asala_products', DEFAULT_PRODUCTS);
+let products = allProducts.filter(p => !HIDDEN_PRODUCTS.includes(p.name));
+
 let settings = load('asala_settings', DEFAULT_SETTINGS);
 let reviews = load('asala_reviews', DEFAULT_REVIEWS);
-let design = load('asala_design', DEFAULT_DESIGN);
 let media = load('asala_media', DEFAULT_MEDIA);
 let shipping = load('asala_shipping', DEFAULT_SHIPPING);
 let account = load('asala_account', DEFAULT_ACCOUNT);
@@ -725,26 +633,16 @@ function scrollToSection(event, sectionId){
   window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20, behavior: 'smooth' });
   document.getElementById('mainNav')?.classList.remove('open');
 }
-
 function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 function toggleMobileMenu(){ document.getElementById('mainNav')?.classList.toggle('open'); }
-
-function applyDesign(){
-  const r=document.documentElement;
-  r.style.setProperty('--black',design.black); r.style.setProperty('--wine',design.wine); r.style.setProperty('--wine-deep',design.wine);
-  r.style.setProperty('--gold',design.gold); r.style.setProperty('--ivory',design.ivory);
-  r.style.setProperty('--font-title',design.fontTitle); r.style.setProperty('--font-body',design.fontBody);
-}
 
 function applySettings(){
   document.getElementById('storeName').textContent=settings.name;
   document.getElementById('sloganText').textContent=settings.slogan;
   document.getElementById('footerName').textContent=settings.name;
-  document.getElementById('heroTitle').innerHTML=settings.heroTitle.replace(/\n/g,'<br>');
-  document.getElementById('heroDesc').textContent=settings.heroDesc;
   document.getElementById('footerEmail').textContent=settings.email;
-  document.getElementById('reviewsTitle').textContent=settings.reviewsTitle||'⭐ آراء عملائنا في الكويت والخليج';
-  document.getElementById('reviewsSub').textContent=settings.reviewsSub||'ثقة واعتزاز بخدمة قادتنا وكبار عملائنا';
+  document.getElementById('reviewsTitle').textContent=settings.reviewsTitle||'⭐ آراء عملائنا';
+  document.getElementById('reviewsSub').textContent=settings.reviewsSub||'ثقة واعتزاز بخدمة قادتنا';
   const wa=`https://wa.me/${settings.wa}`;
   document.getElementById('footerWa').href=wa; document.getElementById('waFloatBtn').href=wa;
   document.getElementById('footerFb').href=settings.fb; document.getElementById('footerIg').href=settings.ig; document.getElementById('footerTt').href=settings.tt;
@@ -787,7 +685,7 @@ function createCard(p){
 }
 
 function renderAll(){
-  applyDesign(); applySettings();
+  applySettings();
   const feat=products.filter(p=>p.featured==='yes');
   document.getElementById('featuredGrid').innerHTML=feat.map(createCard).join('');
   let filtered=products.filter(p=>{
@@ -838,9 +736,6 @@ function openModal(id){
   document.getElementById('modalDesc').textContent=p.desc||'';
   document.getElementById('modalStory').textContent=p.story?'📖 '+p.story:'';
   document.getElementById('modalPrice').textContent=p.price;
-  const isShipping = p.stock && p.stock.includes("قيد الشحن (20");
-  const uBox = document.getElementById('modalUrgency');
-  if(isShipping){ uBox.style.display='block'; uBox.innerHTML=`⏳ <b>الشحنة القادمة خلال 20 يوم</b><br>احجز قطعتك الآن — الكميات محدودة`; } else { uBox.style.display='none'; }
   document.getElementById('clientName').value=''; document.getElementById('clientPhone').value=''; document.getElementById('clientAddress').value='';
   document.getElementById('productModal').classList.add('open');
 }
@@ -964,17 +859,13 @@ async function handleHeroUpload(event){
   media.hero = compressed; localStorage.setItem('asala_media', JSON.stringify(media));
   document.getElementById('hero-preview').src = compressed; document.getElementById('hero-preview').classList.add('show'); document.getElementById('heroImg').src = compressed; showToast('✅ تم رفع صورة الغلاف بنجاح!');
 }
-function removeLogo(){ if(!confirm('حذف اللوجو الحالي؟')) return; media.logo = ''; localStorage.setItem('asala_media', JSON.stringify(media)); document.getElementById('logo-preview').classList.remove('show'); document.getElementById('logo-preview').src = ''; document.getElementById('brandLogo').src = 'https://via.placeholder.com/80x80/c4a76b/0b0908?text=👑'; showToast('🗑️ تم حذف اللوجو'); }
-function removeHero(){ if(!confirm('حذف صورة الغلاف الحالية؟')) return; media.hero = ''; localStorage.setItem('asala_media', JSON.stringify(media)); document.getElementById('hero-preview').classList.remove('show'); document.getElementById('hero-preview').src = ''; document.getElementById('heroImg').src = 'https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1600&h=900&fit=crop'; showToast('🗑️ تم حذف الغلاف'); }
 
 function fillAdminForms(){
   renderAdminList();
-  document.getElementById('set-name').value=settings.name; document.getElementById('set-slogan').value=settings.slogan; document.getElementById('set-topbar').value=settings.topbar; document.getElementById('set-heroTitle').value=settings.heroTitle; document.getElementById('set-heroDesc').value=settings.heroDesc; document.getElementById('set-wa').value=settings.wa; document.getElementById('set-email').value=settings.email; document.getElementById('set-fb').value=settings.fb; document.getElementById('set-ig').value=settings.ig; document.getElementById('set-tt').value=settings.tt; document.getElementById('set-story').value=settings.story;
-  document.getElementById('set-reviewsTitle').value=settings.reviewsTitle||'⭐ آراء عملائنا في الكويت والخليج'; document.getElementById('set-reviewsSub').value=settings.reviewsSub||'ثقة واعتزاز بخدمة قادتنا وكبار عملائنا';
-  document.getElementById('col-black').value=design.black; document.getElementById('col-wine').value=design.wine; document.getElementById('col-gold').value=design.gold; document.getElementById('col-ivory').value=design.ivory; document.getElementById('set-fontTitle').value=design.fontTitle; document.getElementById('set-fontBody').value=design.fontBody;
+  document.getElementById('set-name').value=settings.name; document.getElementById('set-slogan').value=settings.slogan; document.getElementById('set-topbar').value=settings.topbar; document.getElementById('set-wa').value=settings.wa; document.getElementById('set-email').value=settings.email;
   const logoPreview = document.getElementById('logo-preview'); if(media.logo){ logoPreview.src = media.logo; logoPreview.classList.add('show'); } else { logoPreview.classList.remove('show'); }
   const heroPreview = document.getElementById('hero-preview'); if(media.hero){ heroPreview.src = media.hero; heroPreview.classList.add('show'); } else { heroPreview.classList.remove('show'); }
-  renderShippingEditor(); renderReviewsEditor(); document.getElementById('acc-email').value=account.email; document.getElementById('acc-pass').value='';
+  renderReviewsEditor(); document.getElementById('acc-email').value=account.email; document.getElementById('acc-pass').value='';
 }
 
 function renderReviewsEditor(){
@@ -992,7 +883,6 @@ function renderReviewsEditor(){
 function addReview(){ reviews.push({name:"عميل جديد",location:"الكويت",text:"رأي العميل هنا...",stars:5}); saveReviews(); renderReviewsEditor(); showToast('✅ تمت إضافة رأي جديد'); }
 function deleteReview(i){ if(!confirm('حذف هذا الرأي؟')) return; reviews.splice(i,1); saveReviews(); renderReviewsEditor(); }
 function saveReviews(){ localStorage.setItem('asala_reviews', JSON.stringify(reviews)); renderReviews(); }
-function saveReviewsSettings(){ settings.reviewsTitle = document.getElementById('set-reviewsTitle').value; settings.reviewsSub = document.getElementById('set-reviewsSub').value; localStorage.setItem('asala_settings', JSON.stringify(settings)); applySettings(); showToast('✅ تم حفظ عنوان ووصف القسم'); }
 
 function renderAdminList(){
   document.getElementById('prodCount').textContent=products.length;
@@ -1028,27 +918,13 @@ function resetForm(){
 function deleteProduct(id){ if(confirm('حذف هذه التحفة نهائياً؟')){ products=products.filter(p=>p.id!==id); localStorage.setItem('asala_products',JSON.stringify(products)); renderAll();renderAdminList(); } }
 
 function saveSettings(){
-  settings={ name:document.getElementById('set-name').value, slogan:document.getElementById('set-slogan').value, topbar:document.getElementById('set-topbar').value, heroTitle:document.getElementById('set-heroTitle').value, heroDesc:document.getElementById('set-heroDesc').value, wa:document.getElementById('set-wa').value.replace(/\D/g,''), email:document.getElementById('set-email').value, fb:document.getElementById('set-fb').value, ig:document.getElementById('set-ig').value, tt:document.getElementById('set-tt').value, story:document.getElementById('set-story').value, reviewsTitle:settings.reviewsTitle||'⭐ آراء عملائنا في الكويت والخليج', reviewsSub:settings.reviewsSub||'ثقة واعتزاز بخدمة قادتنا وكبار عملائنا' };
+  settings={ name:document.getElementById('set-name').value, slogan:document.getElementById('set-slogan').value, topbar:document.getElementById('set-topbar').value, wa:document.getElementById('set-wa').value.replace(/\D/g,''), email:document.getElementById('set-email').value, fb:settings.fb, ig:settings.ig, tt:settings.tt, reviewsTitle:settings.reviewsTitle, reviewsSub:settings.reviewsSub };
   localStorage.setItem('asala_settings',JSON.stringify(settings)); applySettings();showToast('✅ تم حفظ الإعدادات!');
 }
 
-function saveDesign(){
-  design={ black:document.getElementById('col-black').value, wine:document.getElementById('col-wine').value, gold:document.getElementById('col-gold').value, ivory:document.getElementById('col-ivory').value, fontTitle:document.getElementById('set-fontTitle').value, fontBody:document.getElementById('set-fontBody').value };
-  localStorage.setItem('asala_design',JSON.stringify(design)); applyDesign();showToast('✅ تم حفظ التصميم!');
-}
-
-function renderShippingEditor(){
-  document.getElementById('shippingEditor').innerHTML=shipping.map((s,i)=>`
-    <div style="background:#faf6f0;padding:14px;border-radius:10px;margin-bottom:12px;border:1px solid var(--line);">
-      <label class="field-label">بطاقة ${i+1} — العنوان</label><input type="text" class="form-control" value="${s.title}" onchange="shipping[${i}].title=this.value">
-      <label class="field-label">البنود (سطر لكل بند)</label><textarea class="form-control" rows="3" onchange="shipping[${i}].items=this.value.split('\\n').filter(x=>x.trim())">${s.items.join('\n')}</textarea>
-    </div>`).join('');
-}
-
-function saveShipping(){ localStorage.setItem('asala_shipping',JSON.stringify(shipping)); renderShipping();showToast('✅ تم حفظ الشحن!'); }
 function saveAccount(){ const e=document.getElementById('acc-email').value.trim(); const p=document.getElementById('acc-pass').value; if(!e){alert('⚠️ البريد مطلوب!');return;} account.email=e;if(p)account.pass=p; localStorage.setItem('asala_account',JSON.stringify(account)); showToast('✅ تم حفظ الحساب!'); }
-function exportData(){ const d={products,settings,reviews,design,media,shipping,account}; const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u;a.download=`asala_backup_${Date.now()}.json`;a.click(); URL.revokeObjectURL(u); }
-function importData(evt){ const f=evt.target.files[0];if(!f)return; const r=new FileReader(); r.onload=e=>{ try{ const d=JSON.parse(e.target.result); if(d.products){products=d.products;localStorage.setItem('asala_products',JSON.stringify(products));} if(d.settings){settings=d.settings;localStorage.setItem('asala_settings',JSON.stringify(settings));} if(d.reviews){reviews=d.reviews;localStorage.setItem('asala_reviews',JSON.stringify(reviews));} if(d.design){design=d.design;localStorage.setItem('asala_design',JSON.stringify(design));} if(d.media){media=d.media;localStorage.setItem('asala_media',JSON.stringify(media));} if(d.shipping){shipping=d.shipping;localStorage.setItem('asala_shipping',JSON.stringify(shipping));} if(d.account){account=d.account;localStorage.setItem('asala_account',JSON.stringify(account));} renderAll();fillAdminForms();showToast('✅ تم الاستيراد!'); }catch(err){alert('❌ ملف غير صالح!');} }; r.readAsText(f); }
+function exportData(){ const d={products,settings,reviews,media,shipping,account}; const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u;a.download=`asala_backup_${Date.now()}.json`;a.click(); URL.revokeObjectURL(u); }
+function importData(evt){ const f=evt.target.files[0];if(!f)return; const r=new FileReader(); r.onload=e=>{ try{ const d=JSON.parse(e.target.result); if(d.products){products=d.products;localStorage.setItem('asala_products',JSON.stringify(products));} if(d.settings){settings=d.settings;localStorage.setItem('asala_settings',JSON.stringify(settings));} if(d.reviews){reviews=d.reviews;localStorage.setItem('asala_reviews',JSON.stringify(reviews));} if(d.media){media=d.media;localStorage.setItem('asala_media',JSON.stringify(media));} if(d.shipping){shipping=d.shipping;localStorage.setItem('asala_shipping',JSON.stringify(shipping));} if(d.account){account=d.account;localStorage.setItem('asala_account',JSON.stringify(account));} renderAll();fillAdminForms();showToast('✅ تم الاستيراد!'); }catch(err){alert('❌ ملف غير صالح!');} }; r.readAsText(f); }
 
 let clickCount=0, clickTimer=null;
 document.getElementById('brandTrigger').addEventListener('click',(e)=>{ e.preventDefault(); clickCount++; if(clickCount===1) clickTimer=setTimeout(()=>{clickCount=0;},800); else if(clickCount>=3){clearTimeout(clickTimer);clickCount=0;openLoginModal();} });
